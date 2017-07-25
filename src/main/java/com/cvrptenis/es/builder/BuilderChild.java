@@ -6,9 +6,11 @@ import com.cvrptenis.es.model.childs.Child;
 /**
  * Created by Beruto and Pablo Berbel on 25/7/17. Project -> VRPTenis
  */
+
 public class BuilderChild {
 
-    private Integer cost;
+
+    private Integer cost = 1;
     private String id;
     private double x, y;
 

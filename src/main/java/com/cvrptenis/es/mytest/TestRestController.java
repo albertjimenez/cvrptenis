@@ -1,5 +1,6 @@
 package com.cvrptenis.es.mytest;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,12 @@ public class TestRestController {
 
     @RequestMapping("/api/hello")
     public String hola(){
-        return "hola";
+        return "holsaa";
+    }
+
+    @GetMapping(value = "/")
+    public String ye(){
+
+        return "Testing";
     }
 }

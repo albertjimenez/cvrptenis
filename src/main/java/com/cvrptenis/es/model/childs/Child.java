@@ -5,16 +5,18 @@ import com.cvrptenis.es.interfaces.ChildSelector;
 import com.graphhopper.jsprit.core.problem.Location;
 import com.graphhopper.jsprit.core.problem.job.Service;
 
+import java.io.Serializable;
+
 /**
  * Created by Beruto 12/7/17. Project -> VRPTenis
  */
-public class Child implements ChildSelector {
+
+public class Child implements ChildSelector, Serializable {
 
     private int cost;
     private String id;
     private double x, y;
     private final int WEIGHT_INDEX = 0;
-
 
     public Child(BuilderChild builder) {
         this.cost = builder.getCost();
