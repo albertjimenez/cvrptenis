@@ -7,10 +7,12 @@ import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl;
 import com.graphhopper.jsprit.core.problem.vehicle.VehicleType;
 import com.graphhopper.jsprit.core.problem.vehicle.VehicleTypeImpl;
 
+import java.io.Serializable;
+
 /**
  * Created by Beruto and Pablo Berbel on 12/7/17. Project -> VRPTenis
  */
-public class Van implements VehicleSelector {
+public class Van implements VehicleSelector, Serializable {
 
     private int capacity;
     private String id;
@@ -29,10 +31,76 @@ public class Van implements VehicleSelector {
         }
     }
 
+    public Van(){}
+
+    @Override
+    public String toString() {
+        return "Van{" +
+                "capacity=" + capacity +
+                ", id='" + id + '\'' +
+                ", WEIGHT_INDEX=" + WEIGHT_INDEX +
+                ", x=" + x +
+                ", y=" + y +
+                ", endX=" + endX +
+                ", endY=" + endY +
+                '}';
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getWEIGHT_INDEX() {
+        return WEIGHT_INDEX;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
+    public Double getEndX() {
+        return endX;
+    }
+
+    public void setEndX(Double endX) {
+        this.endX = endX;
+    }
+
+    public Double getEndY() {
+        return endY;
+    }
+
+    public void setEndY(Double endY) {
+        this.endY = endY;
+    }
 
     @Override
     public VehicleImpl buildVehicle() {
-        VehicleTypeImpl.Builder vehicleTypeBuilder = VehicleTypeImpl.Builder.newInstance("vehicleType").addCapacityDimension(WEIGHT_INDEX, capacity);
+        VehicleTypeImpl.Builder vehicleTypeBuilder = VehicleTypeImpl.Builder.newInstance("vehicleType").addCapacityDimension(0, capacity);
         VehicleType vehicleType = vehicleTypeBuilder.build();
         VehicleImpl.Builder vehicleBuilder = VehicleImpl.Builder.newInstance("vehicle:" + id);
         vehicleBuilder.setStartLocation(Location.newInstance(x, y));

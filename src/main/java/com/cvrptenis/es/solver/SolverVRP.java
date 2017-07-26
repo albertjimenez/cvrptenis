@@ -14,14 +14,16 @@ import com.graphhopper.jsprit.core.util.Solutions;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Beruto and Pablo Berbel on 12/7/17. Project -> VRPTenis
  */
 public class SolverVRP {
 
-    public static void solveAndPrint(boolean graphicSolution, Collection<VehicleImpl> listaVehiculos, Collection<Service> listaNenes) {
-        final String IMG_PATH = "/src/main/resources/output/solution.png";
+    public static String solveAndPrint(boolean graphicSolution, Collection<VehicleImpl> listaVehiculos, Collection<Service> listaNenes) {
+        Date date = new Date();
+        final String IMG_PATH = "/src/main/resources/static/solution" + date.toString() +".png";
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.addAllVehicles(listaVehiculos);
         vrpBuilder.addAllJobs(listaNenes);
@@ -31,12 +33,15 @@ public class SolverVRP {
         VehicleRoutingProblemSolution bestSolution = Solutions.bestOf(solutions);
         SolutionPrinter.print(problem, bestSolution, SolutionPrinter.Print.VERBOSE);
         Path currentRelativePath = Paths.get("");
-        String s = currentRelativePath.toAbsolutePath().toString();
+        final String s = currentRelativePath.toAbsolutePath().toString();
+        final String PATH = s+IMG_PATH;
+
 
         if (graphicSolution)
             new GraphStreamViewer(problem, bestSolution).setRenderDelay(100).display();
         else
-            new Plotter(problem, bestSolution).plot(s + IMG_PATH, "solution");
+            new Plotter(problem, bestSolution).plot(s + IMG_PATH, "solution"+date.toString());
+        return PATH;
     }
 
 }
