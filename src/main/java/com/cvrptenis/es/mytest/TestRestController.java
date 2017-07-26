@@ -27,7 +27,6 @@ public class TestRestController {
     private final String JS_IMG = "<img src='data:image/png;base64,";
 
 
-
     @RequestMapping(value = "/api/solve", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String solveVRP(@RequestBody VRProblem vrProblem) {
 
@@ -40,6 +39,11 @@ public class TestRestController {
         String path = SolverVRP.solveAndPrint(false, vehicles, services);
         return openFile(path);
 
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String hello() {
+        return "Hi";
     }
 
     @GetMapping(value = "/api/stub")
