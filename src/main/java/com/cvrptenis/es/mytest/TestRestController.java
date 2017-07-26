@@ -16,21 +16,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Collection;
 import java.util.LinkedList;
 
 /**
  * Created by Beruto and Pablo Berbel on 12/7/17. Project -> cvrptenis
  */
 @RestController
-@RequestMapping("/api")
 public class TestRestController {
 
     private final String JS_IMG = "<img src='data:image/png;base64,";
 
 
 
-    @RequestMapping(value = "/solve", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/solve", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String solveVRP(@RequestBody VRProblem vrProblem) {
 
         System.out.println(vrProblem);
@@ -44,7 +42,7 @@ public class TestRestController {
 
     }
 
-    @RequestMapping(value = "/stub", method = RequestMethod.GET)
+    @GetMapping(value = "/api/stub")
     @ResponseBody
     public VRProblem stubVRP() {
         LinkedList<Van> listaFurgonetas = new LinkedList<>();
