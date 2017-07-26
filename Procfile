@@ -1,1 +1,1 @@
-web:    sh target/bin/app
+web: web: java $JAVA_OPTS -cp target/classes:target/dependency/* cvrp
