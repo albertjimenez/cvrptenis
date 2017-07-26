@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* CvrptenisApplication
+web: java $JAVA_OPTS -jar target/*.jar

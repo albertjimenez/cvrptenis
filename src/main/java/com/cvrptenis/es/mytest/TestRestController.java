@@ -41,11 +41,6 @@ public class TestRestController {
 
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String hello() {
-        return "Hi";
-    }
-
     @GetMapping(value = "/api/stub")
     @ResponseBody
     public VRProblem stubVRP() {
