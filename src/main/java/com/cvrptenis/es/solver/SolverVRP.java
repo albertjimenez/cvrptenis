@@ -35,6 +35,7 @@ public class SolverVRP {
         Path currentRelativePath = Paths.get("");
         final String s = currentRelativePath.toAbsolutePath().toString();
         final String PATH = s+IMG_PATH;
+        System.out.println("Path available to write: "+PATH);
 
 
         if (graphicSolution)
