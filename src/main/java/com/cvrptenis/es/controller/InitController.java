@@ -13,7 +13,7 @@ public class InitController {
         @RequestMapping("/")
         @ResponseBody
         String home() {
-            return "Hello World!";
+            return "If you are seeing this, is that the REST API is working! :)";
         }
 
 }

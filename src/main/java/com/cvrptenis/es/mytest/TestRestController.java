@@ -37,6 +37,7 @@ public class TestRestController {
         vrProblem.getChildren().forEach(child -> services.add(child.buildChild()));
 
         String path = SolverVRP.solveAndPrint(false, vehicles, services);
+        System.out.println("Generated path: "+path);
         return openFile(path);
 
     }

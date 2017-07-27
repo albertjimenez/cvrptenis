@@ -23,7 +23,7 @@ public class SolverVRP {
 
     public static String solveAndPrint(boolean graphicSolution, Collection<VehicleImpl> listaVehiculos, Collection<Service> listaNenes) {
         Date date = new Date();
-        final String IMG_PATH = "/src/main/resources/static/solution" + date.toString() +".png";
+        final String IMG_PATH = "/.tmp/" + date.toString() +".png";
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.addAllVehicles(listaVehiculos);
         vrpBuilder.addAllJobs(listaNenes);
@@ -40,7 +40,7 @@ public class SolverVRP {
         if (graphicSolution)
             new GraphStreamViewer(problem, bestSolution).setRenderDelay(100).display();
         else
-            new Plotter(problem, bestSolution).plot(s + IMG_PATH, "solution"+date.toString());
+            new Plotter(problem, bestSolution).plot(s + IMG_PATH, "solution-"+date.toString());
         return PATH;
     }
 
