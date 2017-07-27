@@ -23,7 +23,8 @@ public class SolverVRP {
 
     public static String solveAndPrint(boolean graphicSolution, Collection<VehicleImpl> listaVehiculos, Collection<Service> listaNenes) {
         Date date = new Date();
-        final String IMG_PATH = "/src/main/resources/static/solution.png";
+//        final String IMG_PATH = "app/src/main/resources/static/solution.png";
+        final String IMG_PATH_HEROKU = "/src/main/resources/solution.png";
         VehicleRoutingProblem.Builder vrpBuilder = VehicleRoutingProblem.Builder.newInstance();
         vrpBuilder.addAllVehicles(listaVehiculos);
         vrpBuilder.addAllJobs(listaNenes);
@@ -33,16 +34,16 @@ public class SolverVRP {
         VehicleRoutingProblemSolution bestSolution = Solutions.bestOf(solutions);
         SolutionPrinter.print(problem, bestSolution, SolutionPrinter.Print.VERBOSE);
         Path currentRelativePath = Paths.get("");
-        final String s = currentRelativePath.toAbsolutePath().toString();
-        final String PATH = s+IMG_PATH;
-        System.out.println("Path available to write: "+PATH);
+//        final String s = currentRelativePath.toAbsolutePath().toString();
+//        final String PATH = s+IMG_PATH;
+        System.out.println("Path available to write: "+IMG_PATH_HEROKU);
 
 
         if (graphicSolution)
             new GraphStreamViewer(problem, bestSolution).setRenderDelay(100).display();
         else
-            new Plotter(problem, bestSolution).plot(s + IMG_PATH, "solution-"+date.toString());
-        return PATH;
+            new Plotter(problem, bestSolution).plot(IMG_PATH_HEROKU, "solution-"+date.toString());
+        return IMG_PATH_HEROKU;
     }
 
 }
