@@ -65,7 +65,7 @@ public class TestRestController {
             byte[] bytes = new byte[(int) file.length()];
             fis.read(bytes);
             final String image = new String(Base64.encodeBase64(bytes), "UTF-8");
-            Files.deleteIfExists(file.toPath());
+//            Files.deleteIfExists(file.toPath());
             return image;
         } catch (IOException e) {
             e.printStackTrace();
