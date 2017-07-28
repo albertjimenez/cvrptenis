@@ -11,7 +11,11 @@ import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,9 +40,8 @@ public class TestRestController {
         vrProblem.getVans().forEach(van -> vehicles.add(van.buildVehicle()));
         vrProblem.getChildren().forEach(child -> services.add(child.buildChild()));
 
-        String path = SolverVRP.solveAndPrint(false, vehicles, services);
-        System.out.println("Generated path: "+path);
-        return openFile(path);
+        BufferedImage image= SolverVRP.solveAndPrint( vehicles, services);
+        return openFile(image);
 
     }
 
@@ -59,18 +62,29 @@ public class TestRestController {
 
     }
 
-    private String openFile(String path) {
-        File file = new File(path);
-        try (FileInputStream fis = new FileInputStream(file);) {
-            byte[] bytes = new byte[(int) file.length()];
-            fis.read(bytes);
-            final String image = new String(Base64.encodeBase64(bytes), "UTF-8");
-//            Files.deleteIfExists(file.toPath());
-            return image;
+    private String openFile(BufferedImage bufferedImage) {
+        String imgstr;
+        imgstr = encodeToString(bufferedImage, "png");
+        System.out.println(imgstr);
+        return imgstr;
+
+    }
+    public static String encodeToString(BufferedImage image, String type) {
+        String imageString = null;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        try {
+            ImageIO.write(image, type, bos);
+            byte[] imageBytes = bos.toByteArray();
+
+            BASE64Encoder encoder = new BASE64Encoder();
+            imageString = encoder.encode(imageBytes);
+
+            bos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
         }
+        return imageString;
     }
 }
 
