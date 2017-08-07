@@ -50,8 +50,8 @@ public class BuilderVan {
         return this;
     }
     public BuilderVan endLocation(double x, double y) {
-        this.x = x;
-        this.y = y;
+        this.endX = x;
+        this.endY = y;
         return this;
     }
 

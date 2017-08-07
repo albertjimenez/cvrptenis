@@ -8,7 +8,6 @@ import com.cvrptenis.es.model.vehicles.Van;
 import com.cvrptenis.es.solver.SolverVRP;
 import com.graphhopper.jsprit.core.problem.job.Service;
 import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import sun.misc.BASE64Encoder;
@@ -16,10 +15,7 @@ import sun.misc.BASE64Encoder;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.LinkedList;
 
 /**
@@ -31,7 +27,9 @@ public class TestRestController {
     private final String JS_IMG = "<img src='data:image/png;base64,";
 
 
+
     @RequestMapping(value = "/api/solve", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "http://localhost:4200")
     public String solveVRP(@RequestBody VRProblem vrProblem) {
 
         System.out.println(vrProblem);
@@ -41,13 +39,15 @@ public class TestRestController {
         vrProblem.getChildren().forEach(child -> services.add(child.buildChild()));
 
         BufferedImage image= SolverVRP.solveAndPrint( vehicles, services);
-        return openFile(image);
+        return openFile(image).trim();
 
     }
 
     @GetMapping(value = "/api/stub")
     @ResponseBody
+    @CrossOrigin(origins = "http://localhost:4200")
     public VRProblem stubVRP() {
+        System.out.println("Accessing stub data");
         LinkedList<Van> listaFurgonetas = new LinkedList<>();
         LinkedList<Child> listaNenes = new LinkedList<>();
         final int NUM_VAN = 5;
@@ -58,7 +58,9 @@ public class TestRestController {
 
         for (int i = 0; i < NUM_CHILD; i++)
             listaNenes.add(new BuilderChild().id(Integer.toString(i)).location(Math.random(), Math.random()).build());
-        return new VRProblem(listaFurgonetas, listaNenes);
+        VRProblem v = new VRProblem(listaFurgonetas, listaNenes);
+        v.toString();
+        return v;
 
     }
 

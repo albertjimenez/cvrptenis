@@ -25,13 +25,14 @@ public class Van implements VehicleSelector, Serializable {
         this.id = builder.getId();
         this.x = builder.getX();
         this.y = builder.getY();
-        if (endX == null || endY == null){
+        if (endX == null || endY == null) {
             endX = x;
             endY = y;
         }
     }
 
-    public Van(){}
+    public Van() {
+    }
 
     @Override
     public String toString() {
@@ -104,7 +105,9 @@ public class Van implements VehicleSelector, Serializable {
         VehicleType vehicleType = vehicleTypeBuilder.build();
         VehicleImpl.Builder vehicleBuilder = VehicleImpl.Builder.newInstance("vehicle:" + id);
         vehicleBuilder.setStartLocation(Location.newInstance(x, y));
-        vehicleBuilder.setEndLocation(Location.newInstance(endX,endY));
+        if (endX != null && endY != null)
+            vehicleBuilder.setEndLocation(Location.newInstance(endX, endY));
+
         vehicleBuilder.setType(vehicleType);
         return vehicleBuilder.build();
     }
