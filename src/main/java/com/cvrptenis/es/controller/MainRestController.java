@@ -77,7 +77,6 @@ public class MainRestController {
         for (int i = 0; i < NUM_CHILD; i++)
             listaNenes.add(new BuilderChild().id(Integer.toString(i)).location(Math.random(), Math.random()).build());
         VRProblem v = new VRProblem(listaFurgonetas, listaNenes);
-        v.toString();
         return v;
 
     }
@@ -90,7 +89,7 @@ public class MainRestController {
 
     }
 
-    public static String encodeToString(BufferedImage image, String type) {
+    private static String encodeToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
