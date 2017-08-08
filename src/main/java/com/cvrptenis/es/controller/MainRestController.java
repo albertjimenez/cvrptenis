@@ -1,4 +1,4 @@
-package com.cvrptenis.es.mytest;
+package com.cvrptenis.es.controller;
 
 import com.cvrptenis.es.builder.BuilderChild;
 import com.cvrptenis.es.builder.BuilderVan;
@@ -16,20 +16,37 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
  * Created by Beruto and Pablo Berbel on 12/7/17. Project -> cvrptenis
  */
 @RestController
-public class TestRestController {
+public class MainRestController {
 
     private final String JS_IMG = "<img src='data:image/png;base64,";
 
 
+    @RequestMapping("/")
+    @ResponseBody
+    @CrossOrigin(origins = "https://albertjimenez.github.io/cvrptenisclient/")
+//    @CrossOrigin(origins = "http://localhost:4200")
+    String home() {
+        return "If you are seeing this, is that the REST API is working! :)";
+    }
+    @ResponseBody
+    @RequestMapping("/api")
+    @CrossOrigin(origins = "https://albertjimenez.github.io/cvrptenisclient/")
+//    @CrossOrigin(origins = "http://localhost:4200")
+    String checkServer() {
+        return new Date().toString();
+    }
+
 
     @RequestMapping(value = "/api/solve", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "https://albertjimenez.github.io/cvrptenisclient/")
+//    @CrossOrigin(origins = "http://localhost:4200")
     public String solveVRP(@RequestBody VRProblem vrProblem) {
 
         System.out.println(vrProblem);
@@ -38,14 +55,15 @@ public class TestRestController {
         vrProblem.getVans().forEach(van -> vehicles.add(van.buildVehicle()));
         vrProblem.getChildren().forEach(child -> services.add(child.buildChild()));
 
-        BufferedImage image= SolverVRP.solveAndPrint( vehicles, services);
+        BufferedImage image = SolverVRP.solveAndPrint(vehicles, services);
         return openFile(image).trim();
 
     }
 
     @GetMapping(value = "/api/stub")
     @ResponseBody
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "https://albertjimenez.github.io/cvrptenisclient/")
+//    @CrossOrigin(origins = "http://localhost:4200")
     public VRProblem stubVRP() {
         System.out.println("Accessing stub data");
         LinkedList<Van> listaFurgonetas = new LinkedList<>();
@@ -71,6 +89,7 @@ public class TestRestController {
         return imgstr;
 
     }
+
     public static String encodeToString(BufferedImage image, String type) {
         String imageString = null;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
