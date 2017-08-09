@@ -5,8 +5,8 @@ This backend allow you to calculate and receive an image with the best route to 
 Used for Tennis club Benicarló, they can optimize the distance and the time for picking and delivering the children.
 Backend made with [Spring Boot](https://github.com/spring-projects/spring-boot) 
 and a modified version of [JSprit](https://github.com/graphhopper/jsprit). I modified the JSprit version to not write files but
-return instances of the files itselfs due to read-only policy on heroku. Modified version is attached on the jar located at 
-[Modified JSprit jar] (https://github.com/albertjimenez/cvrptenis/blob/master/src/main/resources/static/jsprit-analysis-1.7.3-SNAPSHOT.jar)
+return instances of the files itselfs due to read-only policy on heroku. Modified version is attached on the jar located at
+[Modified JSprit jar](https://github.com/albertjimenez/cvrptenis/blob/master/src/main/resources/static/jsprit-analysis-1.7.3-SNAPSHOT.jar)
 
 Next you are going to see the methods available along with the JSON Data of the request:
 
