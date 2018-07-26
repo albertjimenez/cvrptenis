@@ -9,7 +9,6 @@ return instances of the files itselfs due to read-only policy on heroku. Modifie
 [Modified JSprit jar](https://github.com/albertjimenez/cvrptenis/blob/master/src/main/resources/static/jsprit-analysis-1.7.3-SNAPSHOT.jar)
 
 Next you are going to see the methods available along with the JSON Data of the request:
-
 ## POST: http://cvrp-tenis.herokuapp.com/api/solve ##
 You may send an array of objects such as vans and childre, just like this:
 ```json
